@@ -26,7 +26,7 @@ class sendRequest
 	    curl_setopt($curl, CURLOPT_HTTPHEADER    , $api_headers);
 	    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_PROXY, '127.0.0.1:8888');
+		//curl_setopt($curl, CURLOPT_PROXY, '127.0.0.1:8888');
 		curl_exec($curl);
 		$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 	    $response = curl_multi_getcontent($curl);
