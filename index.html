@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OSS Account Name Update</title>
+  <meta charset="utf-8">
+  <link rel="icon" href="https://sandbox.esignlive.com/a/images/icons/favicon.775850b.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<br/>
+  
+  <h2>OSS Account Name Update</h2>
+	<br/>
+  <form class="form" id="logoForm" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="accountId">Account Id</label>
+		<input type="text" class="form-control" id="accountId" name="accountId" aria-describedby="keyHelp" placeholder="Please enter your account id">
+	</div>
+	<div class="form-group">
+		<label for="accountName">Account Name</label>
+		<input type="text" class="form-control" id="accountname" name="accountName" aria-describedby="keyHelp" placeholder="Please enter your account name">
+	</div>
+	<div class="form-group">
+		<label for="apiKey">API key</label>
+		<input type="text" class="form-control" id="apiKey" name="apiKey" aria-describedby="keyHelp" placeholder="Please enter your account’s API key">
+		<small id="keyHelp" class="form-text text-muted">Never share your API key with anyone else.</small>
+	</div>
+
+	<div class="form-group">
+		<label for="apiUrl">Environment</label>
+		<select class="form-control" id="apiUrl" name="apiUrl">
+			<option value="https://sandbox.esignlive.com/api">US2 Sandbox</option>
+			<option value="https://apps.esignlive.com/api">US2 Production</option>
+		</select>
+	</div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br/>
+  <div id="success" style="color: green;"></div>
+  <div id="error" style="color: red;"></div>
+
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function (e) {
+
+	 $("#logoForm").on('submit',(function(e) {
+	  e.preventDefault();
+	  $.ajax({
+			 url: "php/updateName.php",
+	   type: "POST",
+	   data:  new FormData(this),
+	   contentType: false,
+			 cache: false,
+	   processData:false,
+	   beforeSend : function()
+	   {
+
+	   },
+	   success: function(data)
+		  {
+			//var results = JSON.parse(data);
+			console.log(data);
+
+			if(data > 200) {
+				$("#error").append('<p>Error!</p>');
+
+			} else {
+				$("#success").append('<p>Success!</p>');
+			}
+		  },
+		 error: function(e) 
+		  {
+
+		  }          
+		});
+	 }));
+
+	});
+</script>
+
+</body>
+</html>
